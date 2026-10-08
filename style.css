@@ -1,0 +1,795 @@
+/* ==========================================================
+   Nästa steg i livet
+   Innehåll: 1 Variabler · 2 Grund · 3 Header · 4 Hero
+   5 Snabbfakta · 6 Rollväljare · 7 Kort · 8 Berättelse
+   9 Passar det dig? · 10 Steg · 11 Vanliga frågor · 12 Footer
+   13 Större skärmar (media query)
+   ========================================================== */
+
+/* 1. Variabler */
+:root {
+  --color-bg: #ffffff;
+  --color-ink: #111111;
+  --color-main: #1c1c1c;
+  --color-main-dark: #000000;
+  --color-accent: #ffdb4d;
+  --color-accent-hover: #f5c800;
+  --color-surface: #f4f4f1;
+  --color-surface-hover: #ebebe6;
+  --color-line: #e2e2dd;
+  --color-muted: #5b6b73;
+  --radius-card: 24px;
+  --radius-pill: 999px;
+  --gradient-dark: linear-gradient(145deg, var(--color-main) 0%, var(--color-main-dark) 100%);
+  --font-body: "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-heading: "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+/* 2. Grund */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  line-height: 1.6;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+main section {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 3rem 1.25rem;
+}
+
+main section h2 {
+  font-size: clamp(1.7rem, 4.5vw, 2.4rem);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* Sektioner med centrerad text */
+.facts,
+.explorer,
+.benefits,
+.check {
+  text-align: center;
+}
+
+.explorer > p,
+.check > p {
+  max-width: 60ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 3. Header */
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem 1.5rem;
+  padding: 1.1rem 1.5rem;
+  background: #000000;
+  color: #ffffff;
+}
+
+.site-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 0;
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 4.5vw, 2rem);
+  font-weight: bold;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+}
+
+/* Gul prick framför loggan */
+.site-logo::before {
+  content: "";
+  flex: 0 0 auto;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  box-shadow: 0 0 0 4px rgba(255, 219, 77, 0.3);
+}
+
+.site-logo span {
+  color: var(--color-accent);
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.site-nav a {
+  color: #ffffff;
+}
+
+/* 4. Hero */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: none;
+  min-height: 75vh;
+  margin: 0;
+  background-color: var(--color-main-dark);
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.62)),
+    url("bilder/hero.jpg");
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+  text-align: center;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  max-width: 800px;
+}
+
+.hero h1 {
+  margin: 0;
+  text-wrap: balance;
+  font-size: clamp(2.2rem, 8vw, 4rem);
+}
+
+.hero-text {
+  max-width: 55ch;
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.button {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  background-color: var(--color-accent);
+  color: var(--color-ink);
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: var(--radius-pill);
+}
+
+.button:hover {
+  background-color: var(--color-accent-hover);
+}
+
+/* 5. Snabbfakta: klickbara kort och informationspanel */
+.fact-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.25rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.fact-list > li {
+  display: flex;
+  flex: 1 1 0;
+}
+
+.fact {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 1.6rem 1.5rem 1.4rem;
+  overflow: hidden;
+  border: none;
+  border-radius: var(--radius-card);
+  background: var(--gradient-dark);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
+  color: #e8e8e5;
+  font: inherit;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Gul linje upptill */
+.fact::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background-color: var(--color-accent);
+}
+
+/* Dekorativ cirkel i hörnet */
+.fact::after {
+  content: "";
+  position: absolute;
+  right: -30px;
+  bottom: -30px;
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.07);
+  pointer-events: none;
+}
+
+.fact:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.3);
+}
+
+.fact.is-active {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.fact strong,
+.fact span {
+  position: relative;
+  z-index: 1;
+}
+
+.fact strong {
+  color: #ffffff;
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+}
+
+.fact-panel {
+  margin-top: 1.5rem;
+  padding: 1.75rem;
+  border-left: 6px solid var(--color-accent);
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface);
+  text-align: left;
+}
+
+.fact-panel[hidden],
+.fact-detail[hidden] {
+  display: none;
+}
+
+.fact-detail h3 {
+  margin-top: 0;
+}
+
+.fact-detail h4 {
+  margin: 1.25rem 0 0.5rem;
+}
+
+.fact-highlight {
+  padding: 1rem 1.25rem;
+  border-left: 4px solid var(--color-accent);
+  border-radius: 14px;
+  background-color: var(--color-bg);
+}
+
+.fact-note {
+  margin-bottom: 0;
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+.fact-note a {
+  color: var(--color-ink);
+  font-weight: bold;
+}
+
+.course-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.course-list li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 14px;
+  background-color: var(--color-bg);
+}
+
+.course-list span {
+  font-weight: bold;
+}
+
+/* 6. Rollväljare */
+.role-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+.role-button {
+  padding: 0.75rem 1.5rem;
+  border: 2px solid var(--color-main);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+  color: var(--color-main);
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease,
+    background-color 0.2s ease, color 0.2s ease;
+}
+
+.role-button:hover {
+  background-color: var(--color-surface-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+}
+
+.role-button.is-active {
+  border-color: var(--color-main-dark);
+  background: var(--gradient-dark);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+}
+
+.role-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.75rem;
+  border-left: 6px solid var(--color-accent);
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface);
+  text-align: left;
+}
+
+.role-panel h3 {
+  margin-top: 0;
+}
+
+.role-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.role-image[hidden] {
+  display: none;
+}
+
+/* Text i rollpanelen: tar upp resten av bredden bredvid bilden */
+.role-text {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.role-facts {
+  padding-left: 1.25rem;
+}
+
+.role-facts li + li {
+  margin-top: 0.4rem;
+}
+
+/* Allmän översikt innan man valt roll */
+#role-intro > p:last-child {
+  margin-bottom: 0;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--color-line);
+  color: var(--color-main);
+  font-weight: bold;
+}
+
+#role-intro[hidden],
+#role-details[hidden] {
+  display: none;
+}
+
+.role-close {
+  margin-top: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  border: 2px solid var(--color-main);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface);
+  color: var(--color-main);
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.role-close:hover {
+  background-color: var(--color-surface-hover);
+}
+
+/* 7. Kort */
+.card-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card {
+  flex: 1 1 14rem;
+  padding: 1.25rem;
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface);
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+.card p {
+  margin-bottom: 0;
+}
+
+/* 8. Berättelse */
+.story > h2 {
+  text-align: center;
+}
+
+.story-card {
+  display: flex;
+  flex-direction: column;
+  margin: 1.5rem 0 0;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface);
+  text-align: left;
+}
+
+.story-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  object-position: 30% center;
+}
+
+.story-body {
+  padding: 1.5rem;
+}
+
+.story-quote {
+  margin: 0;
+}
+
+.story-quote p {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.story-author {
+  margin: 1.25rem 0 0;
+  font-weight: bold;
+}
+
+.story-author span {
+  display: block;
+  color: var(--color-main);
+  font-weight: normal;
+}
+
+.story-note {
+  margin: 0.75rem 0 0;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+}
+
+/* 9. Passar det här dig? */
+.scale-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 32rem;
+  margin: 1.5rem auto;
+  text-align: left;
+}
+
+.scale-item {
+  min-width: 0;
+  margin: 0;
+  padding: 1rem 1.25rem;
+  border: 1px solid transparent;
+  border-radius: 20px;
+  background-color: var(--color-surface);
+}
+
+.scale-item legend {
+  padding: 0 0.25rem;
+  font-weight: bold;
+}
+
+.scale-options {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.scale-option {
+  position: relative;
+  flex: 1 1 0;
+}
+
+/* Radioknappen ligger osynlig ovanpå, så att den går att nå med tangentbord */
+.scale-option input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.scale-option span {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  border: 2px solid var(--color-line);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface);
+  color: var(--color-main);
+  font-weight: bold;
+}
+
+.scale-option input:hover + span {
+  border-color: var(--color-main);
+  background-color: var(--color-surface-hover);
+}
+
+.scale-option input:checked + span {
+  border-color: var(--color-main-dark);
+  background: var(--gradient-dark);
+  color: #ffffff;
+}
+
+.scale-option input:focus-visible + span {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.scale-ends {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.4rem;
+  color: var(--color-muted);
+  font-size: 0.8rem;
+}
+
+.check-result {
+  font-weight: bold;
+}
+
+.result-button {
+  padding: 0.9rem 2rem;
+  border: none;
+  border-radius: var(--radius-pill);
+  background-color: var(--color-accent);
+  color: var(--color-ink);
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.result-button:hover:not(:disabled) {
+  background-color: var(--color-accent-hover);
+}
+
+.result-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Förslag på riktning */
+.check-suggestion {
+  max-width: 32rem;
+  margin: 1.25rem auto 0;
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--radius-card);
+  background-color: var(--color-surface);
+}
+
+.check-suggestion h3 {
+  margin: 0 0 0.5rem;
+}
+
+.check-suggestion p {
+  margin: 0;
+}
+
+.suggestion-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.suggestion-buttons:not(:empty) {
+  margin-top: 1rem;
+}
+
+.suggestion-button {
+  padding: 0.7rem 1.4rem;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: var(--gradient-dark);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  color: #ffffff;
+  font: inherit;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.suggestion-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* 10. Steg */
+.step-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin: 1.5rem 0 0;
+  padding-left: 1.5rem;
+  list-style-position: inside;
+}
+
+.step h3 {
+  margin: 0 0 0.25rem;
+}
+
+.step p {
+  margin: 0;
+  max-width: 60ch;
+}
+
+/* 11. Vanliga frågor */
+.faq-item {
+  border-bottom: 1px solid var(--color-line);
+}
+
+.faq-question {
+  width: 100%;
+  padding: 1rem 0;
+  border: none;
+  background: none;
+  color: var(--color-ink);
+  font: inherit;
+  font-weight: bold;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq-question[aria-expanded="true"] {
+  color: var(--color-main);
+}
+
+.faq-answer {
+  margin: 0 0 1rem;
+}
+
+/* 12. Footer */
+.site-footer {
+  padding: 1.5rem 1.25rem;
+  background-color: var(--color-main-dark);
+  color: #ffffff;
+  text-align: center;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+/* Minskad rörelse: stäng av animationer */
+@media (prefers-reduced-motion: reduce) {
+  .fact,
+  .role-button,
+  .suggestion-button {
+    transition: none;
+  }
+
+  .fact:hover,
+  .role-button:hover,
+  .suggestion-button:hover {
+    transform: none;
+  }
+}
+
+/* 13. Större skärmar: lägger saker bredvid varandra */
+@media (min-width: 700px) {
+  main section {
+    padding: 4.5rem 2rem;
+  }
+
+  /* Snabbfakta: två kort per rad */
+  .fact-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .fact-list > li {
+    flex: 1 1 calc(50% - 0.625rem);
+  }
+
+  /* Rollpanelen: bild till vänster, text till höger */
+  .role-panel {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  .role-image {
+    flex: 0 0 40%;
+    max-width: 40%;
+  }
+
+  /* Berättelsen: bild till vänster, citat till höger */
+  .story-card {
+    flex-direction: row;
+  }
+
+  .story-image {
+    flex: 0 0 40%;
+    width: 40%;
+    aspect-ratio: auto;
+    object-position: 32% center;
+  }
+
+  .story-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  /* Stegen: två kolumner */
+  .step-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding-left: 0;
+  }
+
+  .step {
+    flex: 1 1 calc(50% - 1rem);
+  }
+}
