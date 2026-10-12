@@ -15,7 +15,7 @@ const roles = {
     time: "1–2 års studier",
     family: "Ofta flexibelt och många jobbar på distans",
     start: "Bygg en egen liten webbsida",
-    image: "bilder/webb.jpg",
+    image: "bilder/web.jpg",
     imageAlt: "Kod på en skärm i en kodeditor"
   },
   test: {
@@ -49,9 +49,19 @@ const factDetails = document.querySelectorAll(".fact-detail");
 const faqQuestions = document.querySelectorAll(".faq-question");
 const scaleItems = document.querySelectorAll(".scale-item");
 const showResultButton = document.querySelector("#show-result");
+const roleTitle = document.querySelector("#role-title");
+const roleDescription = document.querySelector("#role-description");
+const roleTime = document.querySelector("#role-time");
+const roleFamily = document.querySelector("#role-family");
+const roleStart = document.querySelector("#role-start");
+const roleClose = document.querySelector("#role-close");
+const exploreSection = document.querySelector("#explore");
+const checkResult = document.querySelector("#check-result");
+const suggestionText = document.querySelector("#check-suggestion-text");
+const suggestionButtons = document.querySelector("#check-suggestion-buttons");
 
 const MIN_ANSWERS = 3;
-const defaultSuggestionText = "Svara på minst 3 påståenden och klicka på knappen så får du en idé om vilken IT-riktning som kan passa.";
+const defaultSuggestionText = "Svara på minst " + MIN_ANSWERS + " påståenden och klicka på knappen så får du en idé om vilken IT-riktning som kan passa.";
 
 // ---------- Snabbfakta: klickbara kort ----------
 
@@ -101,11 +111,11 @@ function markActiveButton(activeButton) {
 // Skriver in en rolls information i panelen
 function showRole(roleKey) {
   const role = roles[roleKey];
-  document.querySelector("#role-title").textContent = role.title;
-  document.querySelector("#role-description").textContent = role.description;
-  document.querySelector("#role-time").textContent = role.time;
-  document.querySelector("#role-family").textContent = role.family;
-  document.querySelector("#role-start").textContent = role.start;
+  roleTitle.textContent = role.title;
+  roleDescription.textContent = role.description;
+  roleTime.textContent = role.time;
+  roleFamily.textContent = role.family;
+  roleStart.textContent = role.start;
   roleImage.src = role.image;
   roleImage.alt = role.imageAlt;
   roleImage.hidden = false;
@@ -152,6 +162,7 @@ function countAnswered() {
   return document.querySelectorAll(".scale-item input:checked").length;
 }
 
+// Kopplingen mellan påstående och roll är förenklad (se data-roles i HTML). Resultatet är en idé, inget test.
 // Ger poäng till varje roll. "Stämmer ganska bra" (4) ger 1 poäng, "Stämmer helt" (5) ger 2.
 // Returnerar de bästa rollerna, eller en tom lista om inget stämde.
 function getSuggestedRoles() {
@@ -192,32 +203,30 @@ function handleSuggestionClick(event) {
   const matchingButton = document.querySelector('.role-button[data-role="' + roleKey + '"]');
   showRole(roleKey);
   markActiveButton(matchingButton);
-  document.querySelector("#explore").scrollIntoView({ behavior: "smooth" });
+  exploreSection.scrollIntoView({ behavior: "smooth" });
 }
 
 // Nollställer förslaget (när svaren ändras vet vi inte längre om det stämmer)
 function resetSuggestion() {
-  document.querySelector("#check-suggestion-text").textContent = defaultSuggestionText;
-  document.querySelector("#check-suggestion-buttons").replaceChildren();
+  suggestionText.textContent = defaultSuggestionText;
+  suggestionButtons.replaceChildren();
 }
 
 // Visar förslag på riktning. Körs bara när man klickar på knappen
 function showSuggestion() {
-  const text = document.querySelector("#check-suggestion-text");
-  const buttons = document.querySelector("#check-suggestion-buttons");
-  buttons.replaceChildren();
+  suggestionButtons.replaceChildren();
 
   const keys = getSuggestedRoles();
 
   if (keys.length === 0) {
-    text.textContent = "Inget av påståendena stämde särskilt bra, och det är helt okej. Utforska rollerna ovan i lugn och ro, eller ändra dina svar och försök igen.";
+    suggestionText.textContent = "Inget av påståendena stämde särskilt bra, och det är helt okej. Utforska rollerna ovan i lugn och ro, eller ändra dina svar och försök igen.";
     return;
   }
 
   const names = keys.map(function (key) {
     return roles[key].title;
   });
-  text.textContent = "Utifrån dina svar kan du passa som " + joinWithEller(names) + ". Klicka för att läsa mer.";
+  suggestionText.textContent = "Utifrån dina svar kan du passa som " + joinWithEller(names) + ". Klicka för att läsa mer.";
 
   keys.forEach(function (key) {
     const button = document.createElement("button");
@@ -226,14 +235,14 @@ function showSuggestion() {
     button.dataset.role = key;
     button.textContent = roles[key].title;
     button.addEventListener("click", handleSuggestionClick);
-    buttons.appendChild(button);
+    suggestionButtons.appendChild(button);
   });
 }
 
 // Uppdaterar räknaren och knappen när man svarar
 function handleScaleChange() {
   const answered = countAnswered();
-  document.querySelector("#check-result").textContent =
+  checkResult.textContent =
     "Du har svarat på " + answered + " av " + scaleItems.length + ".";
   showResultButton.disabled = answered < MIN_ANSWERS;
   resetSuggestion();
@@ -249,7 +258,7 @@ roleButtons.forEach(function (button) {
   button.addEventListener("click", handleRoleClick);
 });
 
-document.querySelector("#role-close").addEventListener("click", hideRole);
+roleClose.addEventListener("click", hideRole);
 
 faqQuestions.forEach(function (question) {
   question.addEventListener("click", toggleAnswer);

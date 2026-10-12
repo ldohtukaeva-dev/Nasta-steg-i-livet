@@ -1,31 +1,33 @@
 # Nästa steg i livet
 
 ## Om sidan
-Sidan handlar om karriärbyte till IT i vuxen ålder och hur man får ihop det med familj och jobb. Den riktar sig till vuxna, till exempel föräldrar, som är nya i IT och undrar vilka yrken som finns, hur lång tid utbildningarna tar, vad de kostar och vilket stöd man kan få från Arbetsförmedlingen och CSN.
+Sidan handlar om karriärbyte till IT i vuxen ålder och hur man får ihop det med familj och jobb. Den riktar sig till vuxna, till exempel föräldrar, som är nya i IT och undrar vilka yrken som finns, hur lång tid utbildningarna tar, vad de kostar och vilket stöd man kan få från Arbetsförmedlingen och CSN. Berättelsen om Anna på sidan är ett påhittat exempel och är märkt så.
 
 ## Skiss
-Skissen är en wireframe i gråskala som jag tog fram i Figma med hjälp av Figmas AI-funktion: [skiss/skiss-desktop.png](skiss/skiss-desktop.png).
+Skissen är en wireframe i gråskala som jag tog fram i Figma med hjälp av Figmas AI-funktion. Bilden visar både desktop (till vänster) och mobil (till höger): [skiss/skiss.png](skiss/skiss.png).
 
-![Skiss, desktop](skiss/skiss-desktop.png)
+![Skiss, desktop och mobil](skiss/skiss.png)
 
 Den färdiga sidan följer skissens upplägg och ordning, men några saker skiljer sig:
 
+- **Sidhuvud:** skissen har ett enkelt sidhuvud med logga och meny. På den färdiga sidan är sidhuvudet svart med en gul prick framför loggan.
 - **Hero:** i skissen ligger texten i en ruta ovanpå bakgrundsbilden. På den färdiga sidan ligger texten direkt på en mörkare bild, utan ruta, så att den blir lättare att läsa.
-- **Snabbfakta:** skissen visar fyra breda rader med ett plustecken. På den färdiga sidan är det fyra mörka kort med en kort undertext, två och två, och informationspanelen öppnas under korten.
-- **Passar det här dig?:** skissen har tre påståenden med skalan till höger. Den färdiga sidan har fem påståenden med skalan under varje påstående, eftersom det fungerar bättre på en smal mobilskärm. Knappen "Visa mitt förslag" ligger under räknaren i stället för till höger.
+- **Snabbfakta:** skissen visar fyra breda rader med ett plustecken, två och två på desktop och under varandra på mobil. På den färdiga sidan är det fyra mörka kort med en kort undertext, två och två på större skärmar och under varandra på mobil. Informationspanelen öppnas under korten, som i skissen.
+- **Passar det här dig?:** skissen har tre påståenden med skalan till höger på desktop och under påståendet på mobil. Den färdiga sidan har fem påståenden med skalan under varje påstående på alla skärmstorlekar, eftersom det fungerar bättre på en smal mobilskärm. Knappen "Visa mitt förslag" ligger under räknaren i stället för till höger.
+- **Så kommer du igång:** i skissen ligger siffrorna i små rutor. På den färdiga sidan är det vanlig numrering i listan.
 - **Vanliga frågor och sidfot:** de finns inte med i skissen, men de finns på den färdiga sidan.
-- **Mobil:** jag gjorde ingen separat mobilskiss. På mobil läggs allt i en kolumn med en media query (`min-width: 700px`), och korten, bilderna och texten hamnar under varandra.
+- **Mobil:** mobilskissen lägger allt i en kolumn. På den färdiga sidan gäller samma upplägg i grundreglerna, och en media query (`min-width: 700px`) lägger kort, bilder och text bredvid varandra på större skärmar.
 - **Färger och bilder:** skissen är i gråskala med platshållare. Färger (svart och gult), bilder och exakta texter bestämdes under bygget.
 
 ## Funktionalitet
-Besökaren kan göra fyra saker. All logik finns i `script.js`, och alla funktioner kopplas med `addEventListener`.
+Besökaren kan göra fyra saker. All logik finns i `js/script.js`, och alla funktioner kopplas med `addEventListener`.
 
 - **Klicka på ett snabbfakta-kort** och få information om att byta yrke som vuxen, flexibilitet, kostnad och stöd. Ett nytt klick på samma kort stänger panelen. Funktioner: `handleFactClick`, `closeFacts`.
 - **Välja en IT-roll** och se beskrivning, tid till första jobb, om rollen passar familjelivet och ett bra första steg. Funktioner: `handleRoleClick`, `showRole`, `hideRole`, `markActiveButton`, `clearActiveButtons`. Texterna ligger i objektet `roles`.
 - **Öppna och stänga vanliga frågor**, där bara en fråga är öppen i taget. Funktioner: `toggleAnswer`, `setAnswerState`.
-- **Svara på fem påståenden på en skala 1–5** och få förslag på IT-riktning. Funktioner: `handleScaleChange`, `countAnswered`, `getSuggestedRoles`, `showSuggestion`, `handleSuggestionClick`, `joinWithOr`.
+- **Svara på fem påståenden på en skala 1–5** och få förslag på IT-riktning. Funktioner: `handleScaleChange`, `countAnswered`, `getSuggestedRoles`, `showSuggestion`, `handleSuggestionClick`, `joinWithEller`, `resetSuggestion`.
 
-Filer: `index.html` (struktur), `style.css` (utseende och responsivitet), `script.js` (interaktivitet).
+Filer: `index.html` (struktur), `css/style.css` (utseende och responsivitet), `js/script.js` (interaktivitet).
 
 ## AI-användning
 
@@ -37,7 +39,7 @@ Filer: `index.html` (struktur), `style.css` (utseende och responsivitet), `scrip
 **Exempel 2: text om kostnad och stöd**
 - Vad bad jag om? Att texten skulle säga att kurserna är gratis och betalas av regeringen.
 - Vad fick jag? En formulering som begränsar gratis utbildning till yrkeshögskola, komvux och folkhögskola, med en notis om att privata kurser kan kosta pengar. Uppgifterna om CSN och Arbetsförmedlingen kom från en sökning.
-- Vad gjorde jag med det? Jag behöll begränsningen, eftersom "alla kurser är gratis" inte stämmer. Jag lade till länkar till csn.se och arbetsformedlingen.se och en notis om att reglerna ändras.
+- Vad gjorde jag med det? Jag behöll begränsningen, eftersom "alla kurser är gratis" inte stämmer. Jag lade till länkar till csn.se och arbetsformedlingen.se och en notis om att reglerna ändras. Jag bytte också "staten och regeringen" mot "staten eller kommunen", eftersom komvux drivs av kommunerna.
 
 **Exempel 3: kontroll mot kursens krav**
 - Vad bad jag om? Att anpassa projektet efter uppgiftens krav.
@@ -46,23 +48,34 @@ Filer: `index.html` (struktur), `style.css` (utseende och responsivitet), `scrip
 
 **Exempel 4: skiss**
 - Vad bad jag om? Att Figmas AI skulle skapa en wireframe i gråskala över sidans upplägg. Jag beskrev varje sektion och bad om gråa rutor i stället för bilder och text.
-- Vad fick jag? En desktopskiss med alla sektioner utom vanliga frågor och sidfot.
+- Vad fick jag? En wireframe med både desktop- och mobilversion och alla sektioner utom vanliga frågor och sidfot.
 - Vad gjorde jag med det? Jag exporterade den som PNG, lade den i mappen `skiss/` och jämförde den med den färdiga sidan. Skillnaderna står under rubriken Skiss.
 
 ## Tekniska val (VG)
-- **Data i ett objekt.** Rollernas texter ligger i `roles` i `script.js`, så att funktionerna inte behöver ändras när texten ändras.
+- **Data i ett objekt.** Rollernas texter ligger i `roles` i `js/script.js`, så att funktionerna inte behöver ändras när texten ändras.
+- **Mappstruktur.** `index.html` ligger i roten, och CSS (`css/`), JavaScript (`js/`), bilder (`bilder/`) och skiss (`skiss/`) ligger i egna mappar, så att varje filtyp hittas på ett ställe.
 - **`<button>` för klickbara kort.** Knappar fungerar med tangentbord, och `aria-expanded` visar för skärmläsare om panelen är öppen.
 - **`hidden`-attributet** döljer och visar innehåll i stället för inline-stilar.
 - **`data-*`-attribut** (`data-fact`, `data-role`) kopplar knappar till rätt innehåll, så en funktion kan hantera alla kort.
-- **Samma namnkonvention överallt:** engelska ord med bindestreck för filer, klasser och id (`fact-panel`, `role-button`). Tillstånd heter `is-active`.
+- **Samma namnkonvention överallt:** små bokstäver och bindestreck (kebab-case) för filer, klasser och id (`fact-panel`, `role-button`, `web.jpg`). Klasser och id är på engelska, mapparna (`bilder/`, `skiss/`) på svenska. Tillstånd heter `is-active`.
 - **CSS-variabler** för färger, rundning och gradient, så att utseendet ändras på ett ställe.
-- **Mobil först.** Grundreglerna gäller mobil, och en media query (`min-width: 700px`) lägger kort, bild och text bredvid varandra på större skärmar.
+- **Mobil först och en media query.** Grundreglerna gäller mobil. Media queryn `@media (min-width: 700px)` lägger kort, bild och text bredvid varandra när skärmen är minst 700 px bred. Utan den skulle allt ligga i en smal kolumn även på laptop.
 - **Flexbox** används för all placering.
 
 ## Bedömning av AI-innehåll (VG)
-Jag jämförde det AI gav mig med uppgiftens krav och med vad som faktiskt stämmer.
 
-- **Behöll:** funktionsindelningen i JavaScript, `<button>`-lösningen och CSS-variablerna.
-- **Ändrade:** texten om att kurser är gratis, så att den bara gäller utbildningar som staten eller kommunen finansierar. Jag ändrade också tidsangivelserna så att de ligger mellan 8 månader och 2 år.
-- **Tog bort:** upprepade rubriker och regler i CSS som skrevs över längre ner i filen, samt kod som upprepades i JavaScript.
-- **Kontrollerade:** HTML med W3C:s validator och CSS-validatorn. Uppgifterna om CSN har villkor och ändras, därför står det "under vissa villkor" och det finns länkar till källorna.
+**Hur avgjorde jag om det AI gav mig var bra nog?**
+Jag jämförde det med uppgiftens krav och med vad som faktiskt stämmer. HTML kontrollerade jag med W3C:s validator och CSS med CSS-validatorn. Uppgifter om stöd och kostnader jämförde jag med csn.se och arbetsformedlingen.se, eftersom reglerna har villkor och ändras.
+
+**Vad behöll jag?**
+- Funktionsindelningen i JavaScript, där varje funktion gör en sak.
+- `<button>`-lösningen för klickbara kort och `aria-expanded`.
+- CSS-variablerna.
+
+**Vad ändrade jag, och varför?**
+- **Texten om kostnad:** "alla kurser är gratis" stämmer inte. Den gäller nu bara utbildningar som staten eller kommunen finansierar, och en notis säger att privata kurser kan kosta pengar.
+- **Omställningsstudiestödet:** jag jämförde texten med villkoren på csn.se (ålder 27–63, arbete minst 8 av de senaste 14 åren, utbildningen ska stärka ställningen på arbetsmarknaden, högst ca 2 år för den som är under 40) och skrev om den så att den stämmer.
+- **Tidsangivelserna:** de ligger nu mellan 8 månader och 2 år.
+- **En motsägelse:** en kurs var både "gratis" och "kostar lite". Jag skrev om meningen.
+- **Berättelsen:** den är påhittad, så jag märkte den som exempel på sidan. Bild: [fyll i källa och om bilden är AI-genererad].
+- **Det jag tog bort:** upprepade rubriker, regler i CSS som skrevs över längre ner i filen och kod som upprepades i JavaScript.

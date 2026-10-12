@@ -55,10 +55,12 @@ main section h2 {
   font-size: clamp(1.7rem, 4.5vw, 2.4rem);
 }
 
+/* Dubbel ring: gul utanpå, mörk innanför. Syns både mot ljus och mörk bakgrund */
 a:focus-visible,
 button:focus-visible {
   outline: 3px solid var(--color-accent);
   outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--color-ink);
 }
 
 /* Sektioner med centrerad text */
@@ -138,7 +140,7 @@ button:focus-visible {
   background-color: var(--color-main-dark);
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.62), rgba(0, 0, 0, 0.62)),
-    url("bilder/hero.jpg");
+    url("../bilder/hero.jpg");
   background-size: cover;
   background-position: center;
   color: #ffffff;
@@ -165,7 +167,9 @@ button:focus-visible {
   font-size: 1.15rem;
 }
 
-.button {
+/* Gula knappar: länk-knappen i hero och knappen "Visa mitt förslag" */
+.button,
+.result-button {
   display: inline-block;
   padding: 0.9rem 2rem;
   background-color: var(--color-accent);
@@ -175,7 +179,8 @@ button:focus-visible {
   border-radius: var(--radius-pill);
 }
 
-.button:hover {
+.button:hover,
+.result-button:hover:not(:disabled) {
   background-color: var(--color-accent-hover);
 }
 
@@ -585,6 +590,7 @@ button:focus-visible {
 .scale-option input:focus-visible + span {
   outline: 3px solid var(--color-accent);
   outline-offset: 2px;
+  box-shadow: 0 0 0 2px var(--color-ink);
 }
 
 .scale-ends {
@@ -600,18 +606,10 @@ button:focus-visible {
 }
 
 .result-button {
-  padding: 0.9rem 2rem;
   border: none;
-  border-radius: var(--radius-pill);
-  background-color: var(--color-accent);
-  color: var(--color-ink);
   font: inherit;
   font-weight: bold;
   cursor: pointer;
-}
-
-.result-button:hover:not(:disabled) {
-  background-color: var(--color-accent-hover);
 }
 
 .result-button:disabled {
