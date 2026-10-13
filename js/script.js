@@ -7,7 +7,7 @@ const roles = {
     family: "Ofta fasta arbetstider och möjlighet till distans",
     start: "En grundkurs i datorer och nätverk",
     image: "bilder/support.jpg",
-    imageAlt: "Person som hjälper en kollega med datorn på ett kontor"
+    imageAlt: "Tre kollegor vid skrivbord med flera skärmar som visar kod, en av dem dricker kaffe"
   },
   web: {
     title: "Webbutvecklare",
@@ -16,7 +16,7 @@ const roles = {
     family: "Ofta flexibelt och många jobbar på distans",
     start: "Bygg en egen liten webbsida",
     image: "bilder/web.jpg",
-    imageAlt: "Kod på en skärm i en kodeditor"
+    imageAlt: "Kvinna med glasögon som tittar på två skärmar med programkod"
   },
   test: {
     title: "Testare",
@@ -25,7 +25,7 @@ const roles = {
     family: "Ofta regelbundna tider och bra för dig med erfarenhet från en annan bransch",
     start: "En introduktion till testning",
     image: "bilder/test.jpg",
-    imageAlt: "Person som testar en app på en mobiltelefon"
+    imageAlt: "Två kollegor tittar tillsammans på en bärbar dator med färgglada klistermärken"
   },
   data: {
     title: "Dataanalytiker",
@@ -34,7 +34,7 @@ const roles = {
     family: "Ofta kontorsarbete med viss flexibilitet",
     start: "Lär dig grunderna i Excel och SQL",
     image: "bilder/data.jpg",
-    imageAlt: "Diagram och siffror på en datorskärm"
+    imageAlt: "Man vid ett skrivbord med en kaffekopp framför en skärm med diagram"
   }
 };
 
