@@ -1,104 +1,82 @@
 # Nästa steg i livet
 
 ## Om sidan
-
-Jag har gjort en webbplats för vuxna som funderar på att börja jobba inom IT. Det kan kännas svårt att veta var man ska börja, särskilt om man har familj eller jobbar samtidigt. Därför har jag samlat information om några olika IT-yrken, studietid, kostnader och vilket stöd man kan få. Berättelsen om Anna är påhittad och används bara som ett exempel.
+Sidan handlar om karriärbyte till IT i vuxen ålder och hur man får ihop det med familj och jobb. Den riktar sig till vuxna, till exempel föräldrar, som är nya i IT och undrar vilka yrken som finns, hur lång tid utbildningarna tar, vad de kostar och vilket stöd man kan få från Arbetsförmedlingen och CSN. Berättelsen om Anna på sidan är ett påhittat exempel och är märkt så.
 
 ## Skiss
-
-Jag gjorde en enkel wireframe i gråskala i Figma med hjälp av Figmas AI-funktion. Den visar hur sidan skulle se ut både på dator och mobil. Skissen finns här: [skiss/skiss.png](skiss/skiss.png).
+Skissen är en wireframe i gråskala som jag tog fram i Figma med hjälp av Figmas AI-funktion. Bilden visar både desktop (till vänster) och mobil (till höger): [skiss/skiss.png](skiss/skiss.png).
 
 ![Skiss, desktop och mobil](skiss/skiss.png)
 
-Jag utgick från skissen när jag byggde sidan, men ändrade några saker under arbetets gång:
+Den färdiga sidan följer skissens upplägg och ordning, men några saker skiljer sig:
 
-- **Sidhuvudet:** I skissen är det enkelt med en logga och en meny. På den färdiga sidan valde jag svart bakgrund och en gul detalj vid loggan.
-- **Första sektionen (hero):** I skissen ligger texten i en ruta ovanpå bilden. På den färdiga sidan ligger texten direkt på bilden, som jag gjorde mörkare så att texten syns bättre.
-- **Snabbfakta:** I stället för rader med plustecken gjorde jag fyra kort med en kort förklaring. När man klickar på ett kort visas mer information under korten.
-- **Passar det här dig?:** Jag ändrade från tre till fem påståenden. Jag lade också skalan under varje påstående, eftersom det blir tydligare på en mobil. Knappen för att visa förslaget ligger under frågorna.
-- **Så kommer du igång:** I skissen står siffrorna i små rutor. På den färdiga sidan använde jag en vanlig numrerad lista.
-- **Vanliga frågor och sidfot:** De var inte med i skissen, men jag lade till dem när jag byggde sidan.
-- **Mobil och större skärmar:** På mobilen visas innehållet i en kolumn. På större skärmar använder jag en media query (`min-width: 700px`) för att placera vissa kort, bilder och texter bredvid varandra.
-- **Färger och bilder:** Skissen är i gråskala. Jag valde svart och gult som färger och lade till bilder när jag gjorde den färdiga sidan.
+- **Sidhuvud:** skissen har ett enkelt sidhuvud med logga och meny. På den färdiga sidan är sidhuvudet svart med en gul prick framför loggan.
+- **Hero:** i skissen ligger texten i en ruta ovanpå bakgrundsbilden. På den färdiga sidan ligger texten direkt på en mörkare bild, utan ruta, så att den blir lättare att läsa.
+- **Snabbfakta:** skissen visar fyra breda rader med ett plustecken, två och två på desktop och under varandra på mobil. På den färdiga sidan är det fyra mörka kort med en kort undertext, två och två på större skärmar och under varandra på mobil. Informationspanelen öppnas under korten, som i skissen.
+- **Passar det här dig?:** skissen har tre påståenden med skalan till höger på desktop och under påståendet på mobil. Den färdiga sidan har fem påståenden med skalan under varje påstående på alla skärmstorlekar, eftersom det fungerar bättre på en smal mobilskärm. Knappen "Visa mitt förslag" ligger under räknaren i stället för till höger.
+- **Så kommer du igång:** i skissen ligger siffrorna i små rutor. På den färdiga sidan är det vanlig numrering i listan.
+- **Vanliga frågor och sidfot:** de finns inte med i skissen, men de finns på den färdiga sidan.
+- **Mobil:** mobilskissen lägger allt i en kolumn. På den färdiga sidan gäller samma upplägg i grundreglerna, och en media query (`min-width: 700px`) lägger kort, bilder och text bredvid varandra på större skärmar.
+- **Färger och bilder:** skissen är i gråskala med platshållare. Färger (svart och gult), bilder och exakta texter bestämdes under bygget.
 
 ## Funktionalitet
+Besökaren kan göra fyra saker. All logik finns i `js/script.js`, och alla funktioner kopplas med `addEventListener`.
 
-Jag ville att sidan skulle vara mer än bara text. Besökaren kan klicka, välja olika alternativ och få information beroende på vad hen gör. JavaScript-koden finns i `js/script.js`.
+- **Klicka på ett snabbfakta-kort** och få information om att byta yrke som vuxen, flexibilitet, kostnad och stöd. Ett nytt klick på samma kort stänger panelen. Funktioner: `handleFactClick`, `closeFacts`.
+- **Välja en IT-roll** och se beskrivning, tid till första jobb, om rollen passar familjelivet och ett bra första steg. Funktioner: `handleRoleClick`, `showRole`, `hideRole`, `markActiveButton`, `clearActiveButtons`. Texterna ligger i objektet `roles`.
+- **Öppna och stänga vanliga frågor**, där bara en fråga är öppen i taget. Funktioner: `toggleAnswer`, `setAnswerState`.
+- **Svara på fem påståenden på en skala 1–5** och få förslag på IT-riktning. Funktioner: `handleScaleChange`, `countAnswered`, `getSuggestedRoles`, `showSuggestion`, `handleSuggestionClick`, `joinWithEller`, `resetSuggestion`.
 
-- **Snabbfakta:** Man kan klicka på ett kort för att läsa mer om att byta yrke som vuxen, flexibilitet, kostnader och stöd. Klickar man på samma kort igen stängs informationen. Jag använder funktionerna `handleFactClick` och `closeFacts`.
-- **Välja IT-yrke:** Man kan välja IT-support, webbutvecklare, testare eller dataanalytiker och läsa om yrket, ungefärlig studietid, flexibilitet och ett första steg. Informationen finns i objektet `roles`. Funktionerna `handleRoleClick`, `showRole`, `hideRole`, `markActiveButton` och `clearActiveButtons` hanterar valet.
-- **Vanliga frågor:** Man kan öppna och stänga svar. För att sidan inte ska bli för lång är bara ett svar öppet åt gången. Det sköts av `toggleAnswer` och `setAnswerState`.
-- **Frågor om vad som passar:** Besökaren svarar på fem påståenden på en skala från 1 till 5 och får ett förslag på IT-inriktning. Här använder jag bland annat `handleScaleChange`, `countAnswered`, `getSuggestedRoles` och `showSuggestion`.
-
-Filerna är uppdelade så här: `index.html` innehåller strukturen, `css/style.css` utseendet och den responsiva designen, och `js/script.js` interaktiviteten.
+Filer: `index.html` (struktur), `css/style.css` (utseende och responsivitet), `js/script.js` (interaktivitet).
 
 ## AI-användning
 
-Jag använde AI som hjälp under arbetet, men jag gick igenom förslagen och ändrade sådant som behövde anpassas till min sida.
+**Exempel 1: klickbara snabbfakta-kort**
+- Vad bad jag om? Att göra korten med snabbfakta klickbara så att information visas när man klickar. Innehållet skulle handla om att det aldrig är för sent att byta yrke som vuxen, om att få ihop det med familjen, om kurser som tar 8 månader till 2 år och om stöd från Arbetsförmedlingen och CSN.
+- Vad fick jag? HTML med knappar och en informationspanel, CSS för panelen och JavaScript med `handleFactClick` och `closeFacts`.
+- Vad gjorde jag med det? Jag ändrade rubriker och undertexter, lade till ett fjärde kort om kostnad och tog bort en rubrik som upprepade kortets titel. Jag har testat att kortet öppnas, byter och stängs.
 
-### Exempel 1: klickbara snabbfakta
+**Exempel 2: text om kostnad och stöd**
+- Vad bad jag om? Att texten skulle säga att kurserna är gratis och betalas av regeringen.
+- Vad fick jag? En formulering som begränsar gratis utbildning till yrkeshögskola, komvux och folkhögskola, med en notis om att privata kurser kan kosta pengar. Uppgifterna om CSN och Arbetsförmedlingen kom från en sökning.
+- Vad gjorde jag med det? Jag behöll begränsningen, eftersom "alla kurser är gratis" inte stämmer. Jag lade till länkar till csn.se och arbetsformedlingen.se och en notis om att reglerna ändras. Jag bytte också "staten och regeringen" mot "staten eller kommunen", eftersom komvux drivs av kommunerna.
 
-- **Vad bad jag om?** Jag ville att korten med snabbfakta skulle gå att klicka på så att mer information visas. Informationen skulle handla om att byta yrke som vuxen, familjeliv, studietid och stöd från Arbetsförmedlingen och CSN.
-- **Vad fick jag?** Ett förslag på HTML för knappar och en informationspanel, CSS för utseendet och JavaScript för att öppna och stänga panelen.
-- **Vad gjorde jag med det?** Jag ändrade rubriker och korttexter, lade till ett kort om kostnader och tog bort text som upprepade rubriken. Jag testade också att informationen visas, byts och stängs när man klickar.
+**Exempel 3: kontroll mot kursens krav**
+- Vad bad jag om? Att anpassa projektet efter uppgiftens krav.
+- Vad fick jag? En validering med W3C:s validator som hittade två fel: ett `figcaption` som låg i en `div` och en rubrik som hoppade från `h1` till `h3`. Dessutom en omstädad CSS och en JavaScript-fil utan upprepad kod.
+- Vad gjorde jag med det? Jag rättade båda felen, och sidan validerar nu utan fel.
 
-### Exempel 2: information om kostnader och stöd
-
-- **Vad bad jag om?** Jag ville förklara att det finns utbildningar som inte kostar någon kursavgift.
-- **Vad fick jag?** Ett förslag på text om yrkeshögskola, komvux och folkhögskola, plus information om att privata kurser kan kosta pengar.
-- **Vad gjorde jag med det?** Jag behöll inte påståendet att alla kurser är gratis, eftersom det inte stämmer. Jag lade till länkar till CSN och Arbetsförmedlingen och skrev att regler och villkor kan ändras. Jag ändrade också formuleringen om vem som finansierar utbildningarna.
-
-### Exempel 3: kontroll mot uppgiftens krav
-
-- **Vad bad jag om?** Jag bad om hjälp att kontrollera om projektet följde kraven i uppgiften.
-- **Vad fick jag?** Förslag på saker att rätta i HTML och förbättringar i CSS och JavaScript. I arbetet identifierades bland annat problem med placeringen av `figcaption` och en rubriknivå.
-- **Vad gjorde jag med det?** Jag gick igenom förslagen och rättade de fel som hittades. Jag behöver kontrollera den slutliga versionen med validatorerna innan jag lämnar in den.
-
-### Exempel 4: skissen
-
-- **Vad bad jag om?** Jag bad Figmas AI att skapa en wireframe i gråskala med sidans olika sektioner och både dator- och mobilvy.
-- **Vad fick jag?** Ett förslag på layout med grå rutor i stället för riktiga bilder och texter.
-- **Vad gjorde jag med det?** Jag sparade skissen som PNG i mappen `skiss/` och använde den som utgångspunkt. När jag byggde sidan lade jag bland annat till vanliga frågor och en sidfot. Jag beskriver fler skillnader i avsnittet Skiss.
-
-## Bildkällor
-
-Här har jag samlat länkarna till bilderna som används på sidan:
-
-- **`hero.jpg`:** Jag skapade bilden med ChatGPT.
-- **`web.jpg`:** [ER10.kz – Vibe coding hjälper små startups att lyckas](https://er10.kz/read/it-novosti/vibe-coding-pomogaet-nebolshim-startapam-uspeha/).
-- **`test.jpg`:** [IECA – Introducing the AXS Companion to Common App](https://www.iecaonline.com/blog/introducing-the-axs-companion-to-common-app/).
-- **`support.jpg`:** [DKNews.kz – artikel om kvinnor inom IT i Kazakstan](https://dknews.kz/ru/dk-it/319092-zhenshchiny-v-it-v-kazahstane-situaciya-luchshe-chem).
-- **`story.jpg`:** [Coursera – bild via bildproxy](https://d3njjcbhbojbot.cloudfront.net/api/utilities/v1/imageproxy/https://s3.amazonaws.com/coursera-course-photos/0d/1f72a872ec4bef995ec1c867f5e8b9/1200x1200_247177471.jpg?auto=format%2C%20compress%2C%20enhance&dpr=3&w=265&h=216&fit=crop&q=50).
-- **`data.jpg`:** [Clootrack – Customer-centric product development](https://www.clootrack.com/blogs/customer-centric-product-development-harnessing-feedback-for-better-strategy).
+**Exempel 4: skiss**
+- Vad bad jag om? Att Figmas AI skulle skapa en wireframe i gråskala över sidans upplägg. Jag beskrev varje sektion och bad om gråa rutor i stället för bilder och text.
+- Vad fick jag? En wireframe med både desktop- och mobilversion och alla sektioner utom vanliga frågor och sidfot.
+- Vad gjorde jag med det? Jag exporterade den som PNG, lade den i mappen `skiss/` och jämförde den med den färdiga sidan. Skillnaderna står under rubriken Skiss.
 
 ## Tekniska val (VG)
-
-- **Informationen om yrken i ett objekt:** Jag samlade texterna om de olika yrkena i `roles` i `js/script.js`. Då kan jag ändra texten på ett ställe i stället för att ändra flera funktioner.
-- **Mappar för olika filer:** HTML ligger i roten och CSS, JavaScript, bilder och skiss ligger i separata mappar. Det gör det enklare att hitta rätt fil.
-- **Knappar för interaktiva delar:** Jag använder `<button>` för sådant som går att klicka på. Det fungerar även med tangentbord. Attributet `aria-expanded` hjälper till att visa om en panel är öppen.
-- **`hidden` för att visa och dölja innehåll:** Jag använder `hidden` i stället för att ändra inline-stilar med JavaScript.
-- **`data-*`-attribut:** Med till exempel `data-fact` och `data-role` kan knapparna kopplas till rätt information. Då kan samma funktion användas för flera knappar.
-- **Namngivning:** Jag använder små bokstäver och bindestreck i filnamn, klasser och id:n, till exempel `fact-panel` och `role-button`. Det gör namnen lättare att läsa och håller stilen konsekvent.
-- **CSS-variabler:** Jag samlade färger, rundning och gradienter som variabler. Då kan jag ändra utseendet på ett ställe.
-- **Mobil först:** Jag började med regler som fungerar på små skärmar och lade sedan till `@media (min-width: 700px)` för större skärmar.
-- **Flexbox:** Jag använder Flexbox för att placera och ordna flera delar av sidan, till exempel menyn och korten.
+- **Data i ett objekt.** Rollernas texter ligger i `roles` i `js/script.js`, så att funktionerna inte behöver ändras när texten ändras.
+- **Mappstruktur.** `index.html` ligger i roten, och CSS (`css/`), JavaScript (`js/`), bilder (`bilder/`) och skiss (`skiss/`) ligger i egna mappar, så att varje filtyp hittas på ett ställe.
+- **`<button>` för klickbara kort.** Knappar fungerar med tangentbord, och `aria-expanded` visar för skärmläsare om panelen är öppen.
+- **`hidden`-attributet** döljer och visar innehåll i stället för inline-stilar.
+- **`data-*`-attribut** (`data-fact`, `data-role`) kopplar knappar till rätt innehåll, så en funktion kan hantera alla kort.
+- **Samma namnkonvention överallt:** små bokstäver och bindestreck (kebab-case) för filer, klasser och id (`fact-panel`, `role-button`, `web.jpg`). Klasser och id är på engelska, mapparna (`bilder/`, `skiss/`) på svenska. Tillstånd heter `is-active`.
+- **CSS-variabler** för färger, rundning och gradient, så att utseendet ändras på ett ställe.
+- **Mobil först och en media query.** Grundreglerna gäller mobil. Media queryn `@media (min-width: 700px)` lägger kort, bild och text bredvid varandra när skärmen är minst 700 px bred. Utan den skulle allt ligga i en smal kolumn även på laptop.
+- **Flexbox** används för all placering.
 
 ## Bedömning av AI-innehåll (VG)
 
-### Hur avgjorde jag om förslagen var bra nog?
+**Hur avgjorde jag om det AI gav mig var bra nog?**
+Jag jämförde det med uppgiftens krav och med vad som faktiskt stämmer. HTML kontrollerade jag med W3C:s validator och CSS med CSS-validatorn. Uppgifter om stöd och kostnader jämförde jag med csn.se och arbetsformedlingen.se, eftersom reglerna har villkor och ändras.
 
-Jag jämförde förslagen med kraven i uppgiften och funderade på om informationen verkade rimlig. När det gällde kostnader och stöd använde jag information från CSN och Arbetsförmedlingen, eftersom reglerna kan ändras och inte gäller på samma sätt för alla. Jag behöver också kontrollera den slutliga HTML- och CSS-versionen med validatorerna innan inlämning.
+**Vad behöll jag?**
+- Funktionsindelningen i JavaScript, där varje funktion gör en sak.
+- `<button>`-lösningen för klickbara kort och `aria-expanded`.
+- CSS-variablerna.
 
-### Vad behöll jag?
-
-- Att dela upp JavaScript i funktioner som har olika uppgifter.
-- Att använda knappar för de klickbara korten och `aria-expanded` för deras status.
-- CSS-variablerna för färger och andra återkommande värden.
-
-### Vad ändrade jag, och varför?
-
-- **Texten om kostnader:** Jag ändrade formuleringen så att det inte står att alla utbildningar är gratis. Privata kurser kan kosta pengar.
-- **Informationen om stöd:** Jag lade till en hänvisning till CSN och Arbetsförmedlingen och försökte vara tydlig med att olika stöd har olika villkor.
-- **Studietiderna:** Jag använder ungefärliga tider och skriver att de kan skilja sig mellan utbildningar.
-- **Upprepningar i text och kod:** Jag tog bort sådant som upprepades och försökte göra koden lättare att följa.
-- **Berättelsen om Anna:** Eftersom berättelsen är påhittad skrev jag ut det på sidan. Bildkällan finns i avsnittet Bildkällor.
+**Vad ändrade jag, och varför?**
+- **Texten om kostnad:** "alla kurser är gratis" stämmer inte. Den gäller nu bara utbildningar som staten eller kommunen finansierar, och en notis säger att privata kurser kan kosta pengar.
+- **Omställningsstudiestödet:** jag jämförde texten med villkoren på csn.se (ålder 27–63, arbete minst 8 av de senaste 14 åren, utbildningen ska stärka ställningen på arbetsmarknaden, högst ca 2 år för den som är under 40) och skrev om den så att den stämmer.
+- **Tidsangivelserna:** de ligger nu mellan 8 månader och 2 år.
+- **En motsägelse:** en kurs var både "gratis" och "kostar lite". Jag skrev om meningen.
+- **Berättelsen:** den är påhittad, så jag märkte den som exempel på sidan. Bild: [fyll i källa och om bilden är AI-genererad].
+- **Det jag tog bort:** upprepade rubriker, regler i CSS som skrevs över längre ner i filen och kod som upprepades i JavaScript.
+- **Bilder:** bakgrundsbilden (hero) är AI-genererad med OpenAI:s bildgenerering. Övriga bilder, inklusive `support.jpg`: [fyll i källa och licens för varje bild].

@@ -7,7 +7,7 @@ const roles = {
     family: "Ofta fasta arbetstider och möjlighet till distans",
     start: "En grundkurs i datorer och nätverk",
     image: "bilder/support.jpg",
-    imageAlt: "Tre kollegor vid skrivbord med flera skärmar som visar kod, en av dem dricker kaffe"
+    imageAlt: "Man med glasögon och grön huvtröja framför flera skärmar med kod i ett mörkt serverrum"
   },
   web: {
     title: "Webbutvecklare",
