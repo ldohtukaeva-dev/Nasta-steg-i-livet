@@ -58,6 +58,17 @@ Filer: `index.html` (struktur), `css/style.css` (utseende och responsivitet), `j
 - Vad fick jag? En wireframe med både desktop- och mobilversion och alla sektioner utom vanliga frågor och sidfot.
 - Vad gjorde jag med det? Jag exporterade den som PNG, lade den i mappen `skiss/` och jämförde den med den färdiga sidan. Skillnaderna står under rubriken Skiss.
 
+## Bildkällor
+
+Bilderna kommer från sidorna nedan och används bara i den här skoluppgiften. Rättigheterna tillhör respektive upphovsperson.
+
+- **`hero.jpg`:** AI-genererad med ChatGPT (OpenAI).
+- **`web.jpg`:** [ER10.kz](https://er10.kz/read/it-novosti/vibe-coding-pomogaet-nebolshim-startapam-uspeha/)
+- **`test.jpg`:** [IECA](https://www.iecaonline.com/blog/introducing-the-axs-companion-to-common-app/)
+- **`support.jpg`:** Adobe Stock, gratis samling, bild-ID 740166970 ([stock.adobe.com](https://stock.adobe.com/))
+- **`story.jpg`:** [Coursera, kursbild](https://s3.amazonaws.com/coursera-course-photos/0d/1f72a872ec4bef995ec1c867f5e8b9/1200x1200_247177471.jpg)
+- **`data.jpg`:** [Clootrack](https://www.clootrack.com/blogs/customer-centric-product-development-harnessing-feedback-for-better-strategy)
+
 ## Tekniska val (VG)
 
 - **Data i ett objekt.** Rollernas texter ligger i `roles` i `js/script.js`, så att funktionerna inte behöver ändras när texten ändras.
@@ -73,7 +84,7 @@ Filer: `index.html` (struktur), `css/style.css` (utseende och responsivitet), `j
 ## Bedömning av AI-innehåll (VG)
 
 **Hur avgjorde jag om det AI gav mig var bra nog?**
-Jag jämförde det med uppgiftens krav och med vad som faktiskt stämmer. HTML kontrollerade jag med W3C:s validator och CSS med CSS-validatorn. Uppgifter om stöd och kostnader jämförde jag med csn.se och arbetsformedlingen.se, eftersom reglerna har villkor och ändras.
+Jag jämförde det med uppgiftens krav och med vad som faktiskt stämmer. HTML kontrollerade jag med W3C:s validator, och den validerar utan fel. Uppgifter om stöd och kostnader jämförde jag med csn.se och arbetsformedlingen.se, eftersom reglerna har villkor och ändras.
 
 **Vad behöll jag?**
 
@@ -87,6 +98,6 @@ Jag jämförde det med uppgiftens krav och med vad som faktiskt stämmer. HTML k
 - **Omställningsstudiestödet:** jag jämförde texten med villkoren på csn.se (ålder 27–63, arbete minst 8 av de senaste 14 åren, utbildningen ska stärka ställningen på arbetsmarknaden, högst ca 2 år för den som är under 40) och skrev om den så att den stämmer.
 - **Tidsangivelserna:** de ligger nu mellan 8 månader och 2 år.
 - **En motsägelse:** en kurs var både "gratis" och "kostar lite". Jag skrev om meningen.
-- **Berättelsen:** den är påhittad, så jag märkte den som exempel på sidan. Bild: [fyll i källa och om bilden är AI-genererad].
+- **Berättelsen:** den är påhittad, så jag märkte den som exempel på sidan. Bildkällan finns under Bildkällor.
 - **Det jag tog bort:** upprepade rubriker, regler i CSS som skrevs över längre ner i filen och kod som upprepades i JavaScript.
-- **Bilder:** bakgrundsbilden (hero) är AI-genererad med OpenAI:s bildgenerering. Övriga bilder, inklusive `support.jpg`: [fyll i källa och licens för varje bild]
+- **Bilder:** jag skrev ner var varje bild kommer ifrån under Bildkällor..
